@@ -1,0 +1,30 @@
+<input #station type="text" value="1">
+<button (click)="retrieveForecasts(station.value)">Search</button>
+<br/>
+
+
+
+<ng-container *ngIf="forecasts">
+  <h2>Weather forecasts for {{ forecasts.name }} at time {{ forecasts.atime }}</h2>
+  <ul>
+    <li *ngFor="let forecast of forecasts.forecast">
+      {{ forecast.ftime }}
+      <span [ngSwitch]="forecast.W">
+      
+        <i *ngSwitchCase="'Overcast'" class="wi wi-day-sunny-overcast"></i>
+        <i *ngSwitchCase="'Rain'" class="wi wi-rain"></i>
+        <i *ngSwitchCase="'Cloudy'" class="wi wi-cloudy"></i>
+        <i *ngSwitchCase="'Partly cloudy'" class="wi wi-day-cloudy"></i>
+        <i *ngSwitchCase="'Light rain'" class="wi wi-sprinkle"></i>
+        <i *ngSwitchCase="'Clear sky'" class="wi wi-day-sunny"></i>
+        <i *ngSwitchCase="'Rain showers'" class="wi wi-showers"></i>
+
+        <div *ngSwitchDefault>{{ forecast.W }}</div>
+
+      </span>
+
+      {{ forecast.T }}°C
+    </li>
+  </ul>
+</ng-container>
+
